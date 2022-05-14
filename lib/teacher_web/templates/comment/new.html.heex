@@ -1,0 +1,16 @@
+<h2>Add Your Comment</h2>
+
+<.form let={f} for={@comment_changeset} action={Routes.post_comment_path(@conn, :create, @post)}>
+  <%= if @comment_changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :body, class: "control-label" %>
+    <%= text_input f, :body, class: "form-control" %>
+    <%= error_tag f, :body%>
+  </div>
+  <%= submit "Submit", class: "btn btn-primary" %>
+</.form>
