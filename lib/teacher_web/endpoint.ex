@@ -10,6 +10,9 @@ defmodule TeacherWeb.Endpoint do
     signing_salt: "5Sf9r8FS"
   ]
 
+  socket "/socket", TeacherWeb.UserSocket,
+    websocket: [timeout: 45_000]
+
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.
