@@ -5,9 +5,12 @@ defmodule TeacherWeb.PostController do
   alias Teacher.Context
   alias Teacher.Context.Post
 
-  def index(conn, _params) do
-    posts = Context.list_posts()
-    render(conn, "index.html", posts: posts)
+  def index(conn, params \\ %{}) do
+    page =
+      Post
+      |> Repo.paginate(params)
+
+    render(conn, "index.html", posts: page.entries, page: page)
   end
 
   def new(conn, _params) do
@@ -31,7 +34,7 @@ defmodule TeacherWeb.PostController do
     post =
       Context.get_post!(id)
       |> Repo.preload(:comments)
-      
+
     comment_changeset = Teacher.Context.Comment.changeset(%Teacher.Context.Comment{})
     render(conn, "show.html", post: post, comment_changeset: comment_changeset)
   end

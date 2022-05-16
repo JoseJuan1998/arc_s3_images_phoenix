@@ -1,5 +1,13 @@
 <h1>Listing Posts</h1>
 
+<%= if @page.page_number > 1 do %>
+  <%= link "Prev Page", to: Routes.post_path(@conn, :index, page: @page.page_number - 1)%>
+<% end %>
+|
+<%= if @page.page_number < @page.total_pages do %>
+  <%= link "Next Page", to: Routes.post_path(@conn, :index, page: @page.page_number + 1)%>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -13,7 +21,7 @@
 <%= for post <- @posts do %>
     <tr>
       <td><%= post.title %></td>
-      <td><%= post.body %></td>
+      <td><%= as_html(post.body) %></td>
 
       <td>
         <span><%= link "Show", to: Routes.post_path(@conn, :show, post) %></span>
