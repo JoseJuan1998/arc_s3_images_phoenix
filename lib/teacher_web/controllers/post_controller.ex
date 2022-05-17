@@ -3,6 +3,8 @@ defmodule TeacherWeb.PostController do
 
   alias Teacher.Repo
   alias Teacher.Context
+  alias Teacher.Mailer
+  alias Teacher.Email
   alias Teacher.Context.Post
 
   def index(conn, params \\ %{}) do
@@ -59,10 +61,15 @@ defmodule TeacherWeb.PostController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    post = Context.get_post!(id)
-    {:ok, _post} = Context.delete_post(post)
+  defp send_removal_notification(post) do
+    Email.post_removal_email(post)
+    |> Mailer.deliver_later()
+  end
 
+  def delete(conn, %{"id" => id}) do
+    post = Repo.get_by!(Post, slug: id)
+    {:ok, _post} = Context.delete_post(post)
+    send_removal_notification(post)
     conn
     |> put_flash(:info, "Post deleted successfully.")
     |> redirect(to: Routes.post_path(conn, :index))

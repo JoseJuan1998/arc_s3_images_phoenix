@@ -14,6 +14,10 @@ defmodule TeacherWeb.Router do
     plug :accepts, ["json"]
   end
 
+  if Mix.env == :dev do
+    forward "/mailbox", Bamboo.SentEmailViewerPlug
+  end
+
   scope "/api", TeacherWeb, as: :api do
     pipe_through :api
 

@@ -9,6 +9,9 @@ config :teacher, Teacher.Repo,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
+config :teacher, Teacher.Mailer,
+  adapter: Bamboo.LocalAdapter
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -21,7 +24,7 @@ config :teacher, TeacherWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4000],
   check_origin: false,
   code_reloader: true,
-  debug_errors: true,
+  debug_errors: false,
   secret_key_base: "N00OzzOYSdgV4AkyvOLPIFEvYOJNOV1ONRKkGjVslxKttOTJi4/mRFbX3xS0an4h",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
