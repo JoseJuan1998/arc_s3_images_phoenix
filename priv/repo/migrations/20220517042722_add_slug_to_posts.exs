@@ -5,6 +5,7 @@ defmodule Teacher.Repo.Migrations.AddSlugToPosts do
     alter table(:posts) do
       add :slug, :string
     end
+
     create unique_index(:posts, :slug)
   end
 end

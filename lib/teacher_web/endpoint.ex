@@ -10,7 +10,8 @@ defmodule TeacherWeb.Endpoint do
     signing_salt: "5Sf9r8FS"
   ]
 
-  socket "/live", Phoenix.LiveView.Socket, websocket: [timeout: 45_000, connect_info: [session: @session_options]]
+  socket "/live", Phoenix.LiveView.Socket,
+    websocket: [timeout: 45_000, connect_info: [session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -18,10 +19,10 @@ defmodule TeacherWeb.Endpoint do
   # when deploying your static files in production.
 
   plug Plug.Static,
-  at: "/",
-  from: :teacher,
-  gzip: false,
-  only: ~w(assets fonts images favicon.ico robots.txt)
+    at: "/",
+    from: :teacher,
+    gzip: false,
+    only: ~w(assets fonts images favicon.ico robots.txt)
 
   plug TrailingFormatPlug
 

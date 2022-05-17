@@ -14,7 +14,7 @@ defmodule TeacherWeb.Router do
     plug :accepts, ["json"]
   end
 
-  if Mix.env == :dev do
+  if Mix.env() == :dev do
     forward "/mailbox", Bamboo.SentEmailViewerPlug
   end
 
@@ -30,6 +30,7 @@ defmodule TeacherWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+
     resources "/posts", PostController do
       resources "/comments", CommentController, only: [:create]
     end

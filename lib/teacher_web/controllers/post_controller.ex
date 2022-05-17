@@ -70,6 +70,7 @@ defmodule TeacherWeb.PostController do
     post = Repo.get_by!(Post, slug: id)
     {:ok, _post} = Context.delete_post(post)
     send_removal_notification(post)
+
     conn
     |> put_flash(:info, "Post deleted successfully.")
     |> redirect(to: Routes.post_path(conn, :index))
