@@ -32,7 +32,7 @@ defmodule TeacherWeb.PostController do
 
   def show(conn, %{"id" => id}) do
     post =
-      Context.get_post!(id)
+      Repo.get_by!(Post, slug: id)
       |> Repo.preload(:comments)
 
     comment_changeset = Teacher.Context.Comment.changeset(%Teacher.Context.Comment{})
@@ -40,13 +40,13 @@ defmodule TeacherWeb.PostController do
   end
 
   def edit(conn, %{"id" => id}) do
-    post = Context.get_post!(id)
+    post = Repo.get_by!(Post, slug: id)
     changeset = Context.change_post(post)
     render(conn, "edit.html", post: post, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "post" => post_params}) do
-    post = Context.get_post!(id)
+    post = Repo.get_by!(Post, slug: id)
 
     case Context.update_post(post, post_params) do
       {:ok, post} ->

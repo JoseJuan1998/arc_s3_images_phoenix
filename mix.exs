@@ -20,7 +20,7 @@ defmodule Teacher.MixProject do
   def application do
     [
       mod: {Teacher.Application, []},
-      extra_applications: [:logger, :runtime_tools, :scrivener_ecto]
+      extra_applications: [:logger, :runtime_tools, :scrivener_ecto, :exq]
     ]
   end
 
@@ -51,7 +51,8 @@ defmodule Teacher.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:scrivener_ecto, "~> 2.7"},
       {:trailing_format_plug, "~> 0.0.7"},
-      {:earmark, "~> 1.4"}
+      {:earmark, "~> 1.4"},
+      {:exq, "~> 0.16.2"}
     ]
   end
 
