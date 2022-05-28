@@ -21,6 +21,21 @@ config :teacher, TeacherWeb.Endpoint,
   pubsub_server: Teacher.PubSub,
   live_view: [signing_salt: "9Wi053ia"]
 
+config :arc,
+  virtual_host: true,
+  storage: Arc.Storage.S3,
+  bucket: "phoenix-teacher"
+
+config :ex_aws,
+  access_key_id: "AKIA3SHUGV2QYIUN4QGQ",
+  secret_access_key: "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",
+  region: "us-west-1",
+  s3: [
+    scheme: "https://",
+    host: "s3.us-west-1.amazonaws.com",
+    region: "us-west-1"
+  ]
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails

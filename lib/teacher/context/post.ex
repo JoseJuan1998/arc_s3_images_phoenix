@@ -1,5 +1,6 @@
 defmodule Teacher.Context.Post do
   use Ecto.Schema
+  use Arc.Ecto.Schema
   import Ecto.Changeset
   alias Teacher.Purchases.Customer
 
@@ -8,6 +9,7 @@ defmodule Teacher.Context.Post do
     field :body, :string
     field :title, :string
     field :slug, :string
+    field :display_image, TeacherWeb.DisplayImage.Type
     has_many :comments, Teacher.Context.Comment
     has_many :customers, Customer
 
@@ -22,6 +24,7 @@ defmodule Teacher.Context.Post do
 
     post
     |> cast(attrs, [:title, :body, :slug])
+    |> cast_attachments(attrs, [:display_image])
     |> validate_required([:title, :body])
   end
 

@@ -12,13 +12,16 @@
     <%= @post.body %>
   </li>
 
+  <li>
+    <%= display_image(@post) %>
+  </li>
 </ul>
 
 <%= render TeacherWeb.CommentView, "new.html",
                                     conn: @conn,
                                     post: @post,
                                     comment_changeset: @comment_changeset %>
-                                    
+
 <ul>
   <%= for comment <- @post.comments do %>
     <li><%= comment.body %></li>
