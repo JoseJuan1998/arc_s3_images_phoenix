@@ -38,6 +38,8 @@ defmodule TeacherWeb.Router do
     resources "/purchases", PurchaseController, only: [:create]
 
     get "/receipt", PurchaseController, :receipt
+
+    resources "/registrations", UserController, only: [:create, :new]
   end
 
   # Other scopes may use custom stacks.

@@ -27,8 +27,8 @@ config :arc,
   bucket: "phoenix-teacher"
 
 config :ex_aws,
-  access_key_id: "AKIA3SHUGV2QYIUN4QGQ",
-  secret_access_key: "99iKXAHie1fTLPTI5m4qTP3hp0ah6NqB4qi0HJcu",
+  access_key_id: "YOUR_ACCESS_KEY",
+  secret_access_key: "YOUR_SECRET_KEY",
   region: "us-west-1",
   s3: [
     scheme: "https://",
