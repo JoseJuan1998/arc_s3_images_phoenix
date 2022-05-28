@@ -19,7 +19,8 @@ config :teacher, Teacher.Mailer, adapter: Bamboo.TestAdapter
 # you can enable the server option below.
 config :teacher, TeacherWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "rINyolGgh5xwbcgvLyUJ/yMcK1+Wa+X2W5z8OrOfSUR7J/nBbCkTSeSN7Y6NqN0P",
+  secret_key_base:
+    "rINyolGgh5xwbcgvLyUJ/yMcK1+Wa+X2W5z8OrOfSUR7J/nBbCkTSeSN7Y6NqN0P",
   server: false
 
 # In test we don't send emails.

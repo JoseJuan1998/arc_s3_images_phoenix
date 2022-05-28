@@ -34,6 +34,10 @@ defmodule TeacherWeb.Router do
     resources "/posts", PostController do
       resources "/comments", CommentController, only: [:create]
     end
+
+    resources "/purchases", PurchaseController, only: [:create]
+
+    get "/receipt", PurchaseController, :receipt
   end
 
   # Other scopes may use custom stacks.

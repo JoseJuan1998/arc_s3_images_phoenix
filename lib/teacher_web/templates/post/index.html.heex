@@ -1,12 +1,25 @@
 <h1>Listing Posts</h1>
 
-<%= if @page.page_number > 1 do %>
-  <%= link "Prev Page", to: Routes.post_path(@conn, :index, page: @page.page_number - 1)%>
-<% end %>
-|
-<%= if @page.page_number < @page.total_pages do %>
-  <%= link "Next Page", to: Routes.post_path(@conn, :index, page: @page.page_number + 1)%>
-<% end %>
+<p><%= @post_total_message %></p>
+
+<div class="pull-left">
+  <%= if @page.page_number > 1 do %>
+    <%= link "Prev Page", to: Routes.post_path(@conn, :index, page: @page.page_number - 1)%>
+  <% end %>
+  |
+  <%= if @page.page_number < @page.total_pages do %>
+    <%= link "Next Page", to: Routes.post_path(@conn, :index, page: @page.page_number + 1)%>
+  <% end %>
+</div>
+
+<div class="pll-right">
+  <%= form_for @conn, Routes.post_path(@conn, :index), [method: :get, as: :search], fn f -> %>
+    <%= label f, :search %>
+    <%= text_input f, :search %>
+    <%= error_tag f, :search %>
+    <%= submit "Search" %>
+  <% end %>
+</div>
 
 <table>
   <thead>
@@ -19,16 +32,7 @@
   </thead>
   <tbody>
 <%= for post <- @posts do %>
-    <tr>
-      <td><%= post.title %></td>
-      <td><%= as_html(post.body) %></td>
-
-      <td>
-        <span><%= link "Show", to: Routes.post_path(@conn, :show, post) %></span>
-        <span><%= link "Edit", to: Routes.post_path(@conn, :edit, post) %></span>
-        <span><%= link "Delete", to: Routes.post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"] %></span>
-      </td>
-    </tr>
+    <%= render "_post.html", post: post, conn: @conn %>
 <% end %>
   </tbody>
 </table>

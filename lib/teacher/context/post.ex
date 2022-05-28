@@ -1,6 +1,7 @@
 defmodule Teacher.Context.Post do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Teacher.Purchases.Customer
 
   @derive {Phoenix.Param, key: :slug}
   schema "posts" do
@@ -8,6 +9,7 @@ defmodule Teacher.Context.Post do
     field :title, :string
     field :slug, :string
     has_many :comments, Teacher.Context.Comment
+    has_many :customers, Customer
 
     timestamps()
   end
@@ -26,6 +28,7 @@ defmodule Teacher.Context.Post do
   defp slug_map(%{"title" => title}) do
     slug =
       title
+      |> String.trim()
       |> String.downcase()
       |> String.replace(" ", "-")
 

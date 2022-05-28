@@ -20,7 +20,14 @@ defmodule Teacher.MixProject do
   def application do
     [
       mod: {Teacher.Application, []},
-      extra_applications: [:logger, :runtime_tools, :scrivener_ecto, :exq, :bamboo]
+      extra_applications: [
+        :logger,
+        :runtime_tools,
+        :scrivener_ecto,
+        :exq,
+        :bamboo,
+        :stripity_stripe
+      ]
     ]
   end
 
@@ -54,7 +61,9 @@ defmodule Teacher.MixProject do
       {:earmark, "~> 1.4"},
       {:exq, "~> 0.16.2"},
       {:bamboo, "~> 2.2"},
-      {:bamboo_phoenix, "~> 1.0"}
+      {:bamboo_phoenix, "~> 1.0"},
+      {:exgravatar, "~> 2.0"},
+      {:stripity_stripe, "~> 2.13"}
     ]
   end
 

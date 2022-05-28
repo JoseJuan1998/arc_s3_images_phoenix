@@ -1,6 +1,12 @@
 defmodule TeacherWeb.PostController do
   use TeacherWeb, :controller
 
+  import Ecto.Query, warn: false
+
+  alias TeacherWeb.PostData
+
+  plug PostData, [msg: "Your total number of posts: "] when action in [:index]
+
   alias Teacher.Repo
   alias Teacher.Context
   alias Teacher.Mailer
@@ -8,8 +14,11 @@ defmodule TeacherWeb.PostController do
   alias Teacher.Context.Post
 
   def index(conn, params \\ %{}) do
+    search = get_in(params, ["search", "search"])
+
     page =
       Post
+      |> where([u], ilike(u.title, ^"%#{search}%"))
       |> Repo.paginate(params)
 
     render(conn, "index.html", posts: page.entries, page: page)
@@ -37,7 +46,9 @@ defmodule TeacherWeb.PostController do
       Repo.get_by!(Post, slug: id)
       |> Repo.preload(:comments)
 
-    comment_changeset = Teacher.Context.Comment.changeset(%Teacher.Context.Comment{})
+    comment_changeset =
+      Teacher.Context.Comment.changeset(%Teacher.Context.Comment{})
+
     render(conn, "show.html", post: post, comment_changeset: comment_changeset)
   end
 

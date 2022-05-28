@@ -1,0 +1,26 @@
+<tr>
+  <td><%= @post.title %></td>
+  <td><%= as_html(@post.body) %></td>
+
+  <td>
+    <span><%= link "Show", to: Routes.post_path(@conn, :show, @post) %></span>
+    <span><%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %></span>
+    <span><%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %></span>
+  </td>
+
+  <td>
+    <%= form_for @conn, Routes.purchase_path(@conn, :create, post_id: @post.id), [method: :post], fn _f -> %>
+      <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_YOUR_KEY"
+        data-name="Record Store"
+        data-description="Purchase post"
+        data-shipping-address="true"
+        data-billing-address="true"
+        data-label="Buy"
+        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+        data-locale="auto">
+      </script>
+    <% end %>
+  </td>
+</tr>

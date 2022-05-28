@@ -51,7 +51,9 @@ defmodule TeacherWeb.PostControllerTest do
     setup [:create_post]
 
     test "redirects when data is valid", %{conn: conn, post: post} do
-      conn = put(conn, Routes.post_path(conn, :update, post), post: @update_attrs)
+      conn =
+        put(conn, Routes.post_path(conn, :update, post), post: @update_attrs)
+
       assert redirected_to(conn) == Routes.post_path(conn, :show, post)
 
       conn = get(conn, Routes.post_path(conn, :show, post))
@@ -59,7 +61,9 @@ defmodule TeacherWeb.PostControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, post: post} do
-      conn = put(conn, Routes.post_path(conn, :update, post), post: @invalid_attrs)
+      conn =
+        put(conn, Routes.post_path(conn, :update, post), post: @invalid_attrs)
+
       assert html_response(conn, 200) =~ "Edit Post"
     end
   end

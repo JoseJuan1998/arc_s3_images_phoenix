@@ -9,6 +9,10 @@ config :teacher, Teacher.Repo,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
+config :stripity_stripe,
+  api_key:
+    "sk_test_YOUR_SECRET_KEY"
+
 config :teacher, Teacher.Mailer, adapter: Bamboo.LocalAdapter
 
 # For development, we disable any cache and enable
@@ -24,10 +28,12 @@ config :teacher, TeacherWeb.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: false,
-  secret_key_base: "N00OzzOYSdgV4AkyvOLPIFEvYOJNOV1ONRKkGjVslxKttOTJi4/mRFbX3xS0an4h",
+  secret_key_base:
+    "N00OzzOYSdgV4AkyvOLPIFEvYOJNOV1ONRKkGjVslxKttOTJi4/mRFbX3xS0an4h",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild:
+      {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
   ]
 
 # ## SSL Support

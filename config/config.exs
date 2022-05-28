@@ -13,7 +13,11 @@ config :teacher,
 # Configures the endpoint
 config :teacher, TeacherWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: TeacherWeb.ErrorView, accepts: ~w(html json), layout: false],
+  render_errors: [
+    view: TeacherWeb.ErrorView,
+    accepts: ~w(html json),
+    layout: false
+  ],
   pubsub_server: Teacher.PubSub,
   live_view: [signing_salt: "9Wi053ia"]
 

@@ -43,7 +43,10 @@ defmodule Teacher.ContextTest do
 
     test "update_post/2 with invalid data returns error changeset" do
       post = post_fixture()
-      assert {:error, %Ecto.Changeset{}} = Context.update_post(post, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Context.update_post(post, @invalid_attrs)
+
       assert post == Context.get_post!(post.id)
     end
 
